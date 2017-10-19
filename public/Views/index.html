@@ -9,7 +9,28 @@
   <title>Document</title>
   <script>
   $(document).ready(function() {
-    alert("ESCUPELA");
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:27019/users-list",
+      dataType: "json"
+    }).done(function(data) {
+      console.log(data);
+      var data_users = data.users;
+      $.each(data_users, function(i, users) {
+        var name = users.name,
+        surname = users.surname,
+        pass = users.password,
+        email = users.email,
+        user = users.user;
+        
+        !name ? console.log("Name Vacío") : console.log(users.name);
+        !surname ? console.log("Surname Vacío") : console.log(users.surname);
+        !pass ? console.log("Password Vacía") : console.log(users.password);
+        !email ? console.log("E-mail Vacío") : console.log(users.email);
+        !user ? console.log("User Vacío") : console.log(users.user);
+        console.log("\n");
+      });
+    });
   });
   </script>
 </head>
